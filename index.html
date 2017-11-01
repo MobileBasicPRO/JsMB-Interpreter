@@ -1,0 +1,118 @@
+<!Doctype HTML>
+<html id="html">
+
+<head>
+    <title>Интерпретатор MobileBasic'a</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!---->
+
+    <section id="settings" style="display: none;">
+        <div class="relative">
+            <button id="X" onclick="document.getElementById('settings').style.display='none';">X</button>
+            <div class="inputs">
+                <h2>Подключаемые библиотеки:</h2>
+                <label for="rus">Руссификатор операторов</label>
+                <input type="checkbox" id="rus"><br/>
+                <label for="ukr">Украинизатор операторов</label>
+                <input type="checkbox" id="ukr"><br/>
+                <button style="width:100%;" onclick="_saveSettings()">Save</button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!---->
+    <link rel="stylesheet" href="cm/lib/codemirror.css">
+    <link rel="stylesheet" href="cm/theme/cobalt.css">
+    <link rel="stylesheet" href="cm/addon/hint/show-hint.css">
+
+    <script src="cm/lib/codemirror.js"></script>
+    <script src="cm/lib/codemirror.js"></script>
+    <script src="cm/mode/javascript/javascript.js"></script>
+    <script src="cm/mode/css/css.js"></script>
+    <script src="cm/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="cm/addon/edit/matchbrackets.js"></script>
+    <script src="cm/addon/comment/continuecomment.js"></script>
+    <script src="cm/addon/comment/comment.js"></script>
+    <script src="cm/addon/edit/closebrackets.js"></script>
+
+</head>
+
+<body>
+    <div class="background" id="bg">
+        <div class="page" id="page">
+            <h1>Интерпретатор JsMobileBasic</h1>
+            <div class="code">
+                <textarea id="code">fillScreen(rgb(random(0,255),random(0,255),random(0,255)));</textarea><br/>
+                <script>
+                    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+                        lineNumbers: true,
+                        mode: "text/javascript",
+                        matchBrackets: true,
+                        autoCloseBrackets: true,
+                        extraKeys: {
+                            "Ctrl-Tab": "autocomplete",
+                            "Ctrl-/": "toggleComment"
+                        },
+                        continueComments: "Enter",
+                    });
+                    editor.setOption("theme", "cobalt");
+                    editor.setSize("100%", "25vh");
+                    editor.on("keyup", function (e, s) {
+                        $rampage = s;
+                        if (s.type == "keyup" && !e.state.completionActive && s.keyCode != 13 && s.keyCode !=
+                            27 && s.keyCode != 32 && s.keyCode != 8 && /^[A-Zа-яА-Яa-z$_]*$/.test(s.key) && s.key
+                            .length == 1 && !s.ctrlKey && !s.altKey) {
+                            CodeMirror.showHint(e, null, {
+                                completeSingle: false
+                            });
+                            // CodeMirror.commands.autocomplete(e, null, {completeSingle: false});
+                        }
+                    });
+                </script>
+                <div class="buttons">
+                    <button onclick="_execute()" class="btn-bar">Execute!</button>
+                    <button onclick="window.location.reload()" class="btn-bar">reload</button>
+                    <button onclick="_showSettings()" class="btn-bar">Settings</button>
+                    <button onclick="alert('Coming soon...')//_showHelp()" class="btn-bar">?</button>
+                    <button onclick="window.close()" class="btn-bar">Exit</button>
+
+                </div>
+            </div>
+            <div class="canvas">
+                <div id="p" style="color:white;"></div>
+                <canvas id="c">Для запуска MobileBasic приложений требуеться браузер, поддерживающий canvas!</canvas>
+            </div>
+        </div>
+    </div>
+    <div id="audio">
+        <audio id="player0">Для запуска приложений JsMobileBasic требуеться браузер, поддерживающий аудио!</audio>
+    </div>
+    <script>
+        $Config = {
+            type: 'graphic', //graphic/console/api
+            canvas_size: [document.getElementsByClassName("canvas")[0].clientWidth, document.getElementsByClassName(
+                "canvas")[0].clientHeight + window.innerHeight / 5, false], //[x,y,вместить]
+            Debug_Mode: true,
+            name: "Интерпретатор JsMobileBasic'a",
+            fullscreen: false
+        }
+    </script>
+    <script src="script.js"></script>
+    <script>
+        _loadSettings();
+    </script>
+    <script src="MobileBasic.dll"></script>
+    <!---->
+    <script src="cm/addon/hint/show-hint.js"></script>
+    <script src="cm/addon/hint/javascript-hint.js"></script>
+    <!---->
+    <script src="Autorun.bas" type="text/javascript"></script>
+    <script>
+        _init();
+    </script>
+</body>
+
+</html>

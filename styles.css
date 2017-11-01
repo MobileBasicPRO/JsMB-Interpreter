@@ -1,0 +1,138 @@
+/*
+html{
+    height: 100%;
+}
+*/
+
+
+/*Non Select*/
+
+button,
+h1,
+h2,
+h3,
+input,
+label {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+/*===*/
+
+.background {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(32, 0, 0);
+    background: -moz-linear-gradient(90deg, #000000 0%, #5f0000 100%);
+    background: -webkit-gradient(linear, 90deg, color-stop(0%, #000000), color-stop(100%, #5f0000));
+    background: -webkit-linear-gradient(90deg, #000000 0%, #5f0000 100%);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.canvas {
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    position: relative;
+}
+
+.page {
+    margin-top: 50px;
+    margin-left: 75px;
+    margin-right: 75px;
+    margin-bottom: 50px;
+    border: 3px solid gray;
+    background-color: black;
+}
+
+.code {
+    /*text-align: center;*/
+}
+
+.buttons {
+    text-align: center;
+}
+
+#code {
+    width: 98%;
+    height: 15vh;
+}
+
+h1 {
+    text-align: center;
+    font-family: monospace;
+    font-size: 333%;
+    color: yellowgreen;
+}
+
+right {
+    position: relative;
+    right: 0px;
+    text-align: right;
+}
+
+canvas {
+    display: block;
+    /*    margin-left: 75px;*/
+    /*height: 55vh;*/
+    align-self: center;
+}
+
+#p {
+    /*position: absolute;
+    top: 0;
+    left: 0;*/
+    /*height:100%;*/
+}
+
+
+/*Floating Settings*/
+
+.revative {
+    position: relative;
+    z-index: 100;
+}
+
+#settings {
+    position: fixed;
+    z-index: 100;
+    top: 25%;
+    left: 15%;
+    width: 500px;
+    height: 300px;
+    border: 3px solid gray;
+    background-color: black;
+}
+
+#X {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+}
+
+.inputs {
+    background: #222;
+    color: green;
+}
+
+.row{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.btn-bar{
+    width:20%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float:left;
+
+}
