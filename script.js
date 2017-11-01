@@ -1,9 +1,13 @@
 let $$ = (id) => document.getElementById(id);
 
-window.onresize = function () {
-    // _init();
-    Interpreter.init();
+let $Console = {
+    log: console.log,
+    error: console.error,
+    warn: console.warn
 }
+
+
+
 //region test
 /* 
 var _$_$ = {
@@ -104,11 +108,12 @@ const Interpreter = {
     },
     execute() {
         const code = editor.getValue();
-        try {
+        // try {
             eval(code);
-        } catch (e) {
-            console.error(e);
-        }
+        // } catch (e) {
+            // console.error(e);
+            // Interpreter.Console.error(e);
+        // }
     },
     include() {
         let e = document.createElement("script");
@@ -155,5 +160,56 @@ const Interpreter = {
         show() {
             $$("help").style.display = "block";
         }
+    },
+    Console: {
+        show() {
+            $$("sconsole").style.display = "block";
+            Interpreter.Console.btn(!!0);
+        },
+        btn(mode){
+            $$("consolebtn").setAttribute("active",mode?"true":"");
+        },
+        append(...text) {
+            $$("console").innerHTML += `${text}<br/>`;
+            return text;
+        },
+
+        log(...text) {
+            this.append(`<blue>${text}</blue>`);
+            return text;
+        },
+        error(...text) {
+            console.log(text);
+            let msg;
+            if (text instanceof Array) {
+                let error = text[0];
+                let emsg = error.message;
+                for(const arr of $_Errors){
+                    emsg = emsg.replace(new RegExp(arr[0],"g"), arr[1]);
+                }
+                msg = `<red>#${emsg}<br/>
+                        &ensp;&ensp;Строка: ${error.lineno}<br/>
+                        &ensp;&ensp;Символ: ${error.colno}</red>`;
+            } else {
+                msg = `<red>${text}</red>`;
+            }
+            Interpreter.Console.append(msg);
+            Interpreter.Console.btn(!!1);
+            return text;
+        },
+        warn(...text) {
+            this.append(`<yellow>${text}</yellow>`);
+            return text;
+        },
     }
 }
+
+
+window.onresize = function () {
+    // _init();
+    Interpreter.init();
+}
+
+// window.onerror = Interpreter.Console.error;
+
+window.addEventListener("error", Interpreter.Console.error);

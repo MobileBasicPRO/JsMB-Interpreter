@@ -9,7 +9,7 @@
 
     <section id="settings" style="display: none;">
         <div class="relative">
-            <button id="X" onclick="document.getElementById('settings').style.display='none';">X</button>
+            <button class="X" onclick="$$('settings').style.display='none';">X</button>
             <div class="inputs">
                 <h2>Подключаемые библиотеки:</h2>
                 <label for="rus">Руссификатор операторов</label>
@@ -22,11 +22,22 @@
         </div>
     </section>
 
+    <section id="sconsole" style="display: none;">
+        <div class="relative">
+            <button class="X" onclick="$$('sconsole').style.display='none';">X</button>
+            <div class="inputs">
+                <h2>Консоль отладки:</h2>
+                <div id="console"></div>
+            </div>
+
+        </div>
+    </section>
+
 
     <!---->
     <link rel="stylesheet" href="cm/lib/codemirror.css">
-    <!-- <link rel="stylesheet" href="cm/theme/cobalt.css"> -->
-    <link rel="stylesheet" href="cm/theme/blackboard.css">
+    <link rel="stylesheet" href="cm/theme/cobalt.css">
+    <!-- <link rel="stylesheet" href="cm/theme/erlang-dark.css"> -->
     <link rel="stylesheet" href="cm/addon/hint/show-hint.css">
 
     <script src="cm/lib/codemirror.js"></script>
@@ -52,11 +63,11 @@
                 </script> -->
             </div>
             <div class="buttons">
-                <button onclick="Interpreter.execute()" class="btn-bar">Execute!</button>
-                <button onclick="location.reload()" class="btn-bar">reload</button>
-                <button onclick="Interpreter.Settings.show()" class="btn-bar">Settings</button>
-                <button onclick="alert('Coming soon...')//Interpreter.Help.show()" class="btn-bar">?</button>
-                <button onclick="close()" class="btn-bar">Exit</button>
+                <button onclick="Interpreter.execute()" class="btn-bar">Выполнить!</button>
+                <button onclick="location.reload()" class="btn-bar">Перезагрузка</button>
+                <button onclick="Interpreter.Settings.show()" class="btn-bar">Настройки</button>
+                <button onclick="Interpreter.Console.show()" id="consolebtn" class="btn-bar">Консоль</button>
+                <button onclick="window.close()" class="btn-bar">Выход</button>
             </div>
             <div class="canvas">
                 <div id="p" style="color:white;"></div>
@@ -67,6 +78,7 @@
     <div id="audio">
         <audio id="player0">Для запуска приложений JsMobileBasic требуется браузер, поддерживающий аудио!</audio>
     </div>
+    <script src="ustrs.js"></script>
     <script src="Config.js"></script>
     <script src="script.js"></script>
     <script>

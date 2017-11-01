@@ -13,7 +13,7 @@ let $Config, editor;
         },
         continueComments: "Enter",
     });
-    editor.setOption("theme", "blackboard")//"cobalt");
+    editor.setOption("theme", "cobalt");//"erlang-dark");
     editor.setSize("100%", "25vh");
     editor.on("keyup", function (e, s) {
         $rampage = s;
