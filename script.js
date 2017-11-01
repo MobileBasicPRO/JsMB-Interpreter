@@ -1,23 +1,31 @@
+let $$ = (id) => document.getElementById(id);
+
+window.onresize = function () {
+    // _init();
+    Interpreter.init();
+}
+//region test
+/* 
 var _$_$ = {
-    libs:{
-        "rus":false,
-        "ukr":true
+    libs: {
+        "rus": false,
+        "ukr": true
     }
 };
 
-function _loadSettings(){
-    try{
+function _loadSettings() {
+    try {
         var tmp = JSON.parse(localStorage.getItem('settings'));
-    }catch(e){
+    } catch (e) {
         tmp = null;
     }
-    if(tmp){
+    if (tmp) {
         _$_$ = tmp;
         _check(1);
-        if(_$_$.libs.rus) _include("rus.mbm");
-        if(_$_$.libs.ukr) _include("ukr.mbm");
-    }else{
-        localStorage.setItem('settings',JSON.stringify(_$_$));
+        if (_$_$.libs.rus) _include("rus.mbm");
+        if (_$_$.libs.ukr) _include("ukr.mbm");
+    } else {
+        localStorage.setItem('settings', JSON.stringify(_$_$));
     }
 }
 
@@ -29,18 +37,18 @@ function _include(file) {
     return true;
 }
 
-function _saveSettings(){
+function _saveSettings() {
     _check(0);
-    localStorage.setItem('settings',JSON.stringify(_$_$));
-    document.getElementById('settings').style.display='none';
+    localStorage.setItem('settings', JSON.stringify(_$_$));
+    document.getElementById('settings').style.display = 'none';
 }
 
-function _check(mode){
+function _check(mode) {
     // var tmp = document.getElementById;
-    if(!mode){//read
+    if (!mode) { //read
         _$_$.libs.rus = document.getElementById('rus').checked;
         _$_$.libs.ukr = document.getElementById('ukr').checked;
-    }else{//save
+    } else { //save
         document.getElementById('rus').checked = _$_$.libs.rus;
         document.getElementById('ukr').checked = _$_$.libs.ukr;
     }
@@ -57,49 +65,95 @@ function _init() {
     // var p = document.getElementById('p');
 
 }
-window.onresize = function () {
-    _init();
-}
+
 
 function _execute() {
     var code = editor.getValue();
     try {
         eval(code);
-    }catch(e){
+    } catch (e) {
         console.error(e);
     }
 }
 
-function _showSettings(){
+function _showSettings() {
     document.getElementById("settings").style.display = "block";
 }
 
-function _showHelp(){
+function _showHelp() {
     // document.getElementById("help").style.display = "block";
 }
+ */
 
+//endregion test
 const Interpreter = {
-    libs:{
-        "rus":false,
-        "ukr":true
+    settings: {
+        libs: {
+            "rus": false,
+            "ukr": true
+        },
     },
-    init(){},
-    execute(){},
-    include(){
+    init() {
+        const html = $$('html');
+        const body = document.body;
+        const bg = $$('bg');
+        // const page = $$('page');
+        // const canvas;
+        // const code;
+        html.height = body.height = bg.height = window.innerHeight;
+    },
+    execute() {
+        const code = editor.getValue();
+        try {
+            eval(code);
+        } catch (e) {
+            console.error(e);
+        }
+    },
+    include() {
         let e = document.createElement("script");
         e.src = file;
         e.type = "text/javascript";
         document.head.appendChild(e);
     },
-    Settings:{
-        save(){},
-        load(){},
+    Settings: {
+        save() {
+            this.check(false);
+            localStorage.setItem('settings', JSON.stringify(Interpreter.settings));
+            $$('settings').style.display = 'none';
+        },
+        load() {
+            let tmp = null;
+            try {
+                tmp = JSON.parse(localStorage.getItem('settings'));
+            } catch (e) {}
+            if (tmp) {
+                Interpreter.settings = tmp;
+                this.check(true);
+                if (Interpreter.settings.libs.rus) _include("rus.mbm");
+                if (Interpreter.settings.libs.ukr) _include("ukr.mbm");
+            } else {
+                localStorage.setItem('settings', JSON.stringify(Interpreter.settings));
+            }
+        },
 
-        check(){},
+        check(mode) {
+            if (!mode) { //read
+                Interpreter.settings.libs.rus = $$('rus').checked;
+                Interpreter.settings.libs.ukr = $$('ukr').checked;
+            } else { //save
+                $$('rus').checked = Interpreter.settings.libs.rus;
+                $$('ukr').checked = Interpreter.settings.libs.ukr;
+            }
+        },
 
-        show(){}
+        show() {
+            $$("settings").style.display = "block";
+        }
     },
-    Help:{
-        show(){}
+    Help: {
+        show() {
+            $$("help").style.display = "block";
+        }
     }
 }
