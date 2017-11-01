@@ -6,8 +6,6 @@ let $Console = {
     warn: console.warn
 }
 
-
-
 //region test
 /* 
 var _$_$ = {
@@ -175,13 +173,15 @@ const Interpreter = {
         },
 
         log(...text) {
-            this.append(`<blue>${text}</blue>`);
+            if(/%c/.test(text[0])) Interpreter.Console.append(`<gray>${text[0].replace(/%c/g,"")}</gray>`);
+            else
+            Interpreter.Console.append(`<blue>${text}</blue>`);
             return text;
         },
         error(...text) {
             console.log(text);
             let msg;
-            if (text instanceof Array) {
+            if (text[0] instanceof ErrorEvent) {
                 let error = text[0];
                 let emsg = error.message;
                 for(const arr of $_Errors){
@@ -191,17 +191,28 @@ const Interpreter = {
                         &ensp;&ensp;Строка: ${error.lineno}<br/>
                         &ensp;&ensp;Символ: ${error.colno}</red>`;
             } else {
-                msg = `<red>${text}</red>`;
+                msg = `Ошибка: <red>${text}</red>`;
             }
             Interpreter.Console.append(msg);
             Interpreter.Console.btn(!!1);
             return text;
         },
         warn(...text) {
-            this.append(`<yellow>${text}</yellow>`);
+            Interpreter.Console.append(`<yellow>${text}</yellow>`);
             return text;
         },
+        debug(text){
+            Interpreter.Console.append(`<gray>${text}</gray>`);
+        }
     }
+}
+
+
+{
+    console.log = Interpreter.Console.log;
+    console.warn = Interpreter.Console.warn;
+    // console.error = Interpreter.Console.error;
+    window.debug = Interpreter.Console.debug;
 }
 
 
