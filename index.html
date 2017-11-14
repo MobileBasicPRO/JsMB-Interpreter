@@ -10,14 +10,18 @@
     <section id="settings" style="display: none;">
         <div class="relative">
             <button class="X" onclick="$$('settings').style.display='none';">X</button>
-            <div class="inputs">
+            <form class="inputs">
                 <h2>Подключаемые библиотеки:</h2>
-                <label for="rus">Руссификатор операторов</label>
-                <input type="checkbox" id="rus"><br/>
-                <label for="ukr">Украинизатор операторов</label>
-                <input type="checkbox" id="ukr"><br/>
-                <button style="width:100%;" onclick="_saveSettings()">Save</button>
-            </div>
+                <div class="field">
+                    <label for="rus">Руссификатор операторов</label>
+                    <input type="checkbox" id="rus"><br/>
+                </div>
+                <div class="field">
+                    <label for="ukr">Украинизатор операторов</label>
+                    <input type="checkbox" id="ukr"><br/>
+                </div>
+                <button style="width:100%;" onclick="Interpreter.Settings.save(); return 0;">Save</button>
+            </form>
 
         </div>
     </section>

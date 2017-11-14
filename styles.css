@@ -111,6 +111,12 @@ canvas {
     top: 0;
     right: 0;
     border-radius: 5px;
+    background: gray;
+    border-color: black;
+}
+
+section {
+    background: #222;
 }
 
 #sconsole {
@@ -133,6 +139,16 @@ canvas {
 .inputs {
     background: #222;
     color: green;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+    padding: 7px;
+}
+
+label {
+    float: left;
 }
 
 .row {
