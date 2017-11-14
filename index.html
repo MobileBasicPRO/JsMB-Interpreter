@@ -9,7 +9,7 @@
 
     <section id="settings" style="display: none;">
         <div class="relative">
-            <button class="X" onclick="$$('settings').style.display='none';">X</button>
+            <button class="X" onclick="Fader.fadeOut('settings');">X</button>
             <form class="inputs">
                 <h2>Подключаемые библиотеки:</h2>
                 <div class="field">
@@ -28,7 +28,7 @@
 
     <section id="sconsole" style="display: none;">
         <div class="relative">
-            <button class="X" onclick="$$('sconsole').style.display='none';">X</button>
+            <button class="X" onclick="Fader.fadeOut('sconsole');">X</button>
             <div class="inputs">
                 <h2>Консоль отладки:</h2>
                 <div id="console"></div>
@@ -68,13 +68,13 @@
             </div>
             <div class="buttons">
                 <button onclick="Interpreter.execute()" class="btn-bar">Выполнить!</button>
-                <button onclick="location.reload()" class="btn-bar">Перезагрузка</button>
+                <button onclick="if(confirm('Перезагрузить? Это удалит весь код и сбросит программу!')) location.reload()" class="btn-bar">Перезагрузка</button>
                 <button onclick="Interpreter.Settings.show()" class="btn-bar">Настройки</button>
                 <button onclick="Interpreter.Console.show()" id="consolebtn" class="btn-bar">Консоль</button>
                 <button onclick="window.close()" class="btn-bar">Выход</button>
             </div>
             <div class="canvas">
-                <div id="p" style="color:white;"></div>
+                <!-- <div id="p" style="color:gray;position:absolute;top:0;left:0;margin-top:10px;"></div> -->
                 <canvas id="c">Для запуска JsMobileBasic приложений требуется браузер, поддерживающий canvas!</canvas>
             </div>
         </div>
@@ -84,11 +84,12 @@
     </div>
     <script src="ustrs.js"></script>
     <script src="Config.js"></script>
+    <script src="MobileBasic.dll"></script>
     <script src="script.js"></script>
     <script>
         Interpreter.Settings.load();
     </script>
-    <script src="MobileBasic.dll"></script>
+    
     <!---->
     <script src="cm/addon/hint/show-hint.js"></script>
     <script src="cm/addon/hint/javascript-hint.js"></script>
