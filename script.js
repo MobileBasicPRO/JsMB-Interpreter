@@ -32,7 +32,7 @@ const Interpreter = {
             // Interpreter.Console.error(e);
         // }
     },
-    include() {
+    include(file) {
         let e = document.createElement("script");
         e.src = file;
         e.type = "text/javascript";
@@ -52,8 +52,8 @@ const Interpreter = {
             if (tmp) {
                 Interpreter.settings = tmp;
                 this.check(true);
-                if (Interpreter.settings.libs.rus) _include("rus.mbm");
-                if (Interpreter.settings.libs.ukr) _include("ukr.mbm");
+                if (Interpreter.settings.libs.rus) Interpreter.include("rus.mbm");
+                if (Interpreter.settings.libs.ukr) Interpreter.include("ukr.mbm");
             } else {
                 localStorage.setItem('settings', JSON.stringify(Interpreter.settings));
             }
@@ -97,7 +97,7 @@ const Interpreter = {
         log(...text) {
             if(/%c/.test(text[0])) Interpreter.Console.append(`<gray>${text[0].replace(/%c/g,"")}</gray>`);
             else
-            Interpreter.Console.append(`<blue>${text}</blue>`);
+            Interpreter.Console.append(`<lblue>${text}</lblue>`);
             $Console.log(text);
             return text;
         },
@@ -202,6 +202,7 @@ const Fader = {
 
 //JsMB patch
 println = function(text){
+    if(typeof text === "function") text = "[Function]"
     log(text);
     Interpreter.Console.log;
     Interpreter.Console.btn("log");

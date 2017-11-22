@@ -118,7 +118,7 @@ const ПІ = PI;
 очиститиБуферОбміну = clearClipboard;
 
 //Файлы
-
+/*
 зберегтиДанні = saveData;
 завантажитиДанні = readData;
 локальноЗберегтиДанні = localSaveData;
@@ -126,7 +126,7 @@ const ПІ = PI;
 
 виконати = exec;
 виконатиФайл = execFile;
-
+*/
 повнийЕкран = fullScreen;
 
 console.info('Украинизатор операторов загружен!');
