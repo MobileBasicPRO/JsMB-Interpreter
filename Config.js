@@ -32,10 +32,11 @@ let $Config, editor;
 {
     let canvas = document.getElementsByClassName("canvas")[0];
     $Config = {
-        type: 'graphic', //graphic/console/api
+        type: 'graphics', //graphic/console/api
         canvas_size: [canvas.clientWidth, canvas.clientHeight + window.innerHeight / 5, false], //[x,y,вместить]
         Debug_Mode: true,
         name: "Интерпретатор JsMobileBasic",
-        fullscreen: false
+        fullscreen: false,
+        window_mount: true
     }
 }
