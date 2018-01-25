@@ -1,12 +1,12 @@
 {
     "env": {
-        "es6": "error",
+        "es6": true,
         "node": true,
         "browser": true
     },
     "extends": "eslint:recommended",
     "rules": {
-        "strict": "error",
+        "strict": "off",
         "no-undef": "warn",
         "no-unused-vars": "warn",
         "accessor-pairs": "error",
@@ -280,13 +280,13 @@
         "sourceType": "script",
         "ecmaFeatures": {
             "modules": false,
-            "defaultParams": "error",
-            "classes": "error",
-            "arrowFunctions": "error",
-            "blockBindings": "error",
-            "forOf": "error",
-            "spread": "error",
-            "templateStrings": "error"
+            "defaultParams": true,
+            "classes": true,
+            "arrowFunctions": true,
+            "blockBindings": true,
+            "forOf": true,
+            "spread": true,
+            "templateStrings": true
         }
     }
 }
